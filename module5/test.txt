@@ -1,2 +1,3 @@
 10 input x
 11 input y
+12 let c = a + b
