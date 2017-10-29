@@ -16,7 +16,7 @@
 int main () 
 {
 	FILE *fp = fopen("test.txt", "r");
-	FILE *error =fopen("error.txt", "w");
+	FILE *error =fopen("error.txt", "a+");
 	//FILE *aexp = fopen("arthexp.txt","w");
 	char str[60];
 	const char s[2] = " ";
@@ -101,10 +101,6 @@ int main ()
 					else if(strcmp(tempcommand,"input") == 0)
 					{
 						command = 'i';
-					}
-					else if(strcmp(tempcommand,"read") == 0)
-					{
-						command = 'r';
 					}
 					else if(strcmp(tempcommand,"let") == 0)
 					{
