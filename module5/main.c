@@ -25,8 +25,8 @@ int main ()
 	/* get the first token */
 	//token = strtok(str, s);
 
-
-	int flag = 1, ctoken = 0, cline = 0, i = 0, b, lineno = -1;
+	int lineno, preline;
+	int flag = 1, ctoken = 0, cline = 0, i = 0, b;
 	for (int c = getc(fp); c != EOF; c = getc(fp))
 	{
 		if (c == '\n') // Increment ctoken if this character is newline
@@ -35,48 +35,62 @@ int main ()
 	//printf("%d", cline);
 	int a[cline];
 	fseek(fp, 0, SEEK_SET);
-	
+
 	//Iteration for each line of SHL.   	
 	while(flag <= cline)
 	{
 		fgets (str, 60, fp);
 		
 		//Removing Black Spaces in SHL code.
-
-		
+		//printf("%s ", str);
 		//Tokenising.		
 		token = strtok(str, s);
-		
+		//printf("%s ", token);
 		//Iteration for each word of line.
 		while(token != NULL)
 		{
-			
+			//printf("enter while loop\n");
 			//Line Number Error Checking.
+			int len = strlen(token);
 			if(ctoken == 0)
 			{
-				++lineno;
-				a[lineno] = atoi(token);
+				//++lineno;
+				lineno = atoi(token);
 				
 				//Non Numberic Line Numbering.
-				if(a[lineno] == 0)
+				if(lineno == 0)
 				{
-					fprintf(error,"Error: Line Number at %d:Invalid format to number line use only intger values . \n", cline);
+					fprintf(error,"\nError: Line Number at %d:Non-intger values . \n", flag);
 				}
 				
 				//Non Ascending Line Numbering.
 				if(lineno > 0)
 				{
-					if(a[lineno - 1] > a[lineno])
+					if(flag == 1)
 					{
-						fprintf(error,"Error: Line Number at %d: Invalid Order.", cline - 1);
+						preline = lineno;
+					}					
+					else
+					{
+						if(lineno - 1 != preline)
+						{
+							//printf("preline %d line %d", preline, lineno);
+							fprintf(error,"\n\nError: Line Number at %d: Invalid Order.\n", flag - 1);
+						}
+						preline = lineno;
 					}
+				}
+				// Negative Line number.
+				else
+				{
+					fprintf(error,"\nError: Line Number at %d: Negative Number.", flag);
 				}				
 			}		
 			
 			if(ctoken == 1)
 			{
 				//printf("\nctoken %d token %s", ctoken, token);
-				int len = strlen(token), tkncpy = 0;
+				int tkncpy = 0;
 				
 				// Checking invalid command from length of command.
 				if(len > 5)
@@ -85,14 +99,14 @@ int main ()
 				}			
 				else
 				{
-					// Making command of same case.
+					// Making a copy of token.
 					char tempcommand[len];
 					while( tkncpy <= len ) 
 					{
-						tempcommand[tkncpy] = tolower(token[tkncpy]);
+						tempcommand[tkncpy] = token[tkncpy];
 						tkncpy++;
    					}
-   					
+   					printf("%s", tempcommand);
    					//Identifying the command.
 					if(strcmp(tempcommand,"rem") == 0)
 					{
@@ -101,10 +115,7 @@ int main ()
 					else if(strcmp(tempcommand,"input") == 0)
 					{
 						command = 'i';
-					}
-					else if(strcmp(tempcommand,"read") == 0)
-					{
-						command = 'r';
+						//printf("command %c flag %d \n", command, flag);	
 					}
 					else if(strcmp(tempcommand,"let") == 0)
 					{
@@ -118,9 +129,13 @@ int main ()
 					{
 						command = 'g';
 					}					
-					else if(strcmp(tempcommand,"end") == 0)
+					else if(strcmp(tempcommand,"end\n") == 0)
 					{
 						command = 'e';
+						if(cline != flag)
+						{
+							fprintf(error, "\nStatement after end encountered. %d\n", flag);
+						}
 					}
 					else if(strcmp(tempcommand,	"if") == 0)
 					{
@@ -128,22 +143,165 @@ int main ()
 					}					
 					else
 					{
-						fprintf(error, "\nInvalid command in line %d\n", flag);
+						fprintf(error, "\nInvalid '%s' command in line %d\n", tempcommand, flag);
 					}																									
 				}					
-				
+					//printf("command %c flag %d \n", command, flag);		
 			}
+			
+			if(ctoken > 1)
+			{
+				//printf("enter ctoken > 1\n ");
+				if(command == 'i')
+				{
+					if(ctoken > 2)
+					{
+						//printf("enter more token in input\n ");
+						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of Input statement.", flag);
+					}
+					
+					/*
+					 * 
+					 * 
+					 * 
+					 * Enter Input Code Here.
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 */
+					
+				}
+				
+				if(command == 'l')
+				{
+					if(ctoken > 2)
+					{
+						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of Let statement.", flag);
+					}	
+					/*
+					 * 
+					 * 
+					 * 
+					 * Enter Let Code Here.
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 */					
+												
+				}
+				
+				if(command == 'p')
+				{
+					if(ctoken > 2)
+					{
+						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of Print statement.", flag);
+					}	
+					
+					/*
+					 * 
+					 * 
+					 * 
+					 * Enter Print Code Here.
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 */					
+									
+				}
+			
+				if(command == 'g')
+				{
+					if(ctoken > 2)
+					{
+						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of Goto statement.", flag);
+					}
+					if(ctoken == 2)
+					{
+						int temp = atoi(token);
+						//printf("Temp %d token %s", temp, token);
+						if(temp <= 0)
+						{
+							fprintf(error,"\nError: Goto Statement at %d: Invalid line number ", flag);
+						}
+					}										
+				}
+			
+				if(command == 'e')
+				{
+					fprintf(error,"\nError: End Statement at %d: Invalid Syntax for end statement. ", flag);
+				}
+			
+				if(command == 'j')
+				{
+					if(ctoken > 4)
+					{
+						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of If..goto statement.", flag);
+					}
+					char ifexp[len];
+					int tkncpy = 0;
+					while( tkncpy <= len ) 
+					{
+						ifexp[tkncpy] = token[tkncpy];
+						tkncpy++;
+					}	
+					
+					//Checks logical exp.				
+					if(ctoken == 2)
+					{
+   						if(ifexp[0] < 'a' || ifexp[0] > 'z')
+   						{
+   							fprintf(error,"\nError: If Statement at %d: Invalid choice of variable.", flag);
+   						}
+   						
+   						if(ifexp[3] < 'a' || ifexp[3] > 'z')
+   						{
+   							fprintf(error,"\nError: If Statement at %d: Invalid choice of variable.", flag);
+   						}
+						//printf("%c\n", ifexp[0]);
+					}
+					
+					//Check goto in if statement.
+					if(ctoken == 3)
+					{
+						if(strcmp(ifexp,"goto") != 0)
+						{
+							fprintf(error,"\nError: If Statement at %d: Invalid Syntax check 'goto' token.", flag);
+						}
+					}
+					
+					//Checks gotos line no..
+					if(ctoken == 4)
+					{
+						int temp = atoi(ifexp);
+						//printf("Temp %d", temp);
+						if(temp <= 0)
+						{
+							fprintf(error,"\nError: If Statement at %d: goto line number invalid.", flag);
+						}
+					}
+										
+				}																			
+			}
+			//printf("command %c flag %d \n", command, flag);
+			//printf("\nprint ctoken :%d", ctoken);
 			ctoken++; //
 			token = strtok(NULL, s);
 			
 		}
-		printf("command %c flag %d \n", command, flag);	
+		//printf("command %c flag %d \n", command, flag);	
 		command = 'x';	//Reseting command to x
 		flag++;
 		ctoken = 0; //Reseting token count for next line of code. 
 	}
 	
-	for(int i = 0; i < cline; ++i)
-		printf("%d ", a[i]);		
-	return(0);
+	return 0;
 }
