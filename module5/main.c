@@ -30,7 +30,7 @@ int main ()
 	for (int c = getc(fp); c != EOF; c = getc(fp))
 	{
 		if (c == '\n') // Increment ctoken if this character is newline
-		cline = cline + 1; 
+			cline = cline + 1; 
 	}
 	//printf("%d", cline);
 	int a[cline];
@@ -40,9 +40,9 @@ int main ()
 	while(flag <= cline)
 	{
 		fgets (str, 60, fp);
-		
-		//Removing Black Spaces in SHL code.
+
 		//printf("%s ", str);
+		
 		//Tokenising.		
 		token = strtok(str, s);
 		//printf("%s ", token);
@@ -259,12 +259,12 @@ int main ()
 					{
    						if(ifexp[0] < 'a' || ifexp[0] > 'z')
    						{
-   							fprintf(error,"\nError: If Statement at %d: Invalid choice of variable.", flag);
+   							fprintf(error,"\nError: If Statement at %d: Invalid choice of variable'%c'.", flag, ifexp[0]);
    						}
    						
    						if(ifexp[3] < 'a' || ifexp[3] > 'z')
    						{
-   							fprintf(error,"\nError: If Statement at %d: Invalid choice of variable.", flag);
+   							fprintf(error,"\nError: If Statement at %d: Invalid choice of variable'%c'.", flag, ifexp[3]);
    						}
 						//printf("%c\n", ifexp[0]);
 					}
@@ -291,13 +291,10 @@ int main ()
 										
 				}																			
 			}
-			//printf("command %c flag %d \n", command, flag);
-			//printf("\nprint ctoken :%d", ctoken);
+
 			ctoken++; //
-			token = strtok(NULL, s);
-			
+			token = strtok(NULL, s);	
 		}
-		//printf("command %c flag %d \n", command, flag);	
 		command = 'x';	//Reseting command to x
 		flag++;
 		ctoken = 0; //Reseting token count for next line of code. 

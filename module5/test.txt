@@ -1,5 +1,5 @@
-10 input x
-11 if x==y goto 10
+-10 input x
+11 if X==y goto 10
 12 let c=a+b	
 13 goto 10
 14 end

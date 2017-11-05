@@ -1,0 +1,6 @@
+
+Error: Line Number at 1: Negative Number.
+
+Error: Line Number at 1: Invalid Order.
+
+Error: If Statement at 2: Invalid choice of variable'X'.
