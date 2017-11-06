@@ -60,7 +60,8 @@ int main ()
 				//Non Numberic Line Numbering.
 				if(lineno == 0)
 				{
-					fprintf(error,"\nError: Line Number at %d:Non-intger values . \n", flag);
+					fprintf(error,"\nError: Line Number at %d:Non-intger values . ", flag);
+					
 				}
 				
 				//Non Ascending Line Numbering.
@@ -75,7 +76,7 @@ int main ()
 						if(lineno - 1 != preline)
 						{
 							//printf("preline %d line %d", preline, lineno);
-							fprintf(error,"\n\nError: Line Number at %d: Invalid Order.\n", flag - 1);
+							fprintf(error,"\nError: Line Number at %d: Invalid Order.", flag - 1);
 						}
 						preline = lineno;
 					}
@@ -95,7 +96,7 @@ int main ()
 				// Checking invalid command from length of command.
 				if(len > 5)
 				{
-					fprintf(error, "\nError: Invalid SHL command.\n");
+					fprintf(error, "\nError: Invalid SHL command.");
 				}			
 				else
 				{
@@ -134,7 +135,7 @@ int main ()
 						command = 'e';
 						if(cline != flag)
 						{
-							fprintf(error, "\nStatement after end encountered. %d\n", flag);
+							fprintf(error, "\nWarning: Statement after end encountered.");
 						}
 					}
 					else if(strcmp(tempcommand,	"if") == 0)
@@ -143,7 +144,7 @@ int main ()
 					}					
 					else
 					{
-						fprintf(error, "\nInvalid '%s' command in line %d\n", tempcommand, flag);
+						fprintf(error, "\nInvalid command in line %d.", flag);
 					}																									
 				}					
 					//printf("command %c flag %d \n", command, flag);		
@@ -180,7 +181,8 @@ int main ()
 					if(ctoken > 2)
 					{
 						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of Let statement.", flag);
-					}	
+					}
+	
 					/*
 					 * 
 					 * 
@@ -202,7 +204,17 @@ int main ()
 					{
 						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of Print statement.", flag);
 					}	
-					
+					if(ctoken == 2)
+					{
+						int varlen = strlen(token);
+						if(varlen > 1)
+						{
+							fprintf(error,"\nError: Print Statement at %d: Invalid choice of variable.", flag);
+						}
+						
+						if
+					}
+										
 					/*
 					 * 
 					 * 
