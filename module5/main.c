@@ -160,20 +160,21 @@ int main ()
 						//printf("enter more token in input\n ");
 						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of Input statement.", flag);
 					}
-					
-					/*
-					 * 
-					 * 
-					 * 
-					 * Enter Input Code Here.
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 */
-					
+					if(ctoken == 2)
+					{
+						int varlen = strlen(token);
+						char var = token[0];
+						printf("%c", var);
+						if(varlen > 2)
+						{
+							fprintf(error,"\nError: Print Statement at %d: Invalid choice of variable.", flag);
+						}
+						
+						if(var < 'a' || var > 'z')
+						{
+							fprintf(error,"\nError: Print Statement at %d: Invalid choice of variable.", flag);
+						}
+					}										
 				}
 				
 				if(command == 'l')
@@ -181,21 +182,7 @@ int main ()
 					if(ctoken > 2)
 					{
 						fprintf(error,"\nError: Tokens Exceeded at %d: Invalid Syntax of Let statement.", flag);
-					}
-	
-					/*
-					 * 
-					 * 
-					 * 
-					 * Enter Let Code Here.
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 */					
-												
+					}												
 				}
 				
 				if(command == 'p')
@@ -207,27 +194,18 @@ int main ()
 					if(ctoken == 2)
 					{
 						int varlen = strlen(token);
-						if(varlen > 1)
+						char var = token[0];
+						printf("%c", var);
+						if(varlen > 2)
 						{
 							fprintf(error,"\nError: Print Statement at %d: Invalid choice of variable.", flag);
 						}
 						
-						if
-					}
-										
-					/*
-					 * 
-					 * 
-					 * 
-					 * Enter Print Code Here.
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 */					
-									
+						if(var < 'a' || var > 'z')
+						{
+							fprintf(error,"\nError: Print Statement at %d: Invalid choice of variable.", flag);
+						}
+					}					
 				}
 			
 				if(command == 'g')
