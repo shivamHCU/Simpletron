@@ -244,7 +244,7 @@ int main ()
 						tkncpy++;
 					}	
 					
-					//Checks logical exp.				
+					//Checks logical exp				
 					if(ctoken == 2)
 					{
    						if(ifexp[0] < 'a' || ifexp[0] > 'z')
