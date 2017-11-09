@@ -1,0 +1,6 @@
+-10 input x
+11 if X==y goto 10
+12 let c=a+b	
+13 goto 10
+14 print a
+15 let
