@@ -1,8 +1,10 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+
 char stack[100];
-int top=-1;
+
+int top = -1;
 
 int isnumber(char c)
 {
@@ -27,14 +29,11 @@ void push(char data)
 char pop1()
 {
 	return stack[top--];
-	
 }
 
 void pop()
-{
-    
-	stack[top--]=0;
-    
+{    
+	stack[top--]=0;   
 }
 int isalnum(char c)
 {
@@ -248,9 +247,9 @@ void postfix(char s[])
 			 i++;
 		 }
 	 }	
-	 while(top>-1)
+	 while(top > -1)
 	 {
-	 	postfix[j++]=pop1();
+	 	postfix[j++] = pop1();
 	 }
 	 postfix[j]='\0';
 	 printf("\nthe postfix expression is:%s",postfix);
