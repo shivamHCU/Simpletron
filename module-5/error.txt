@@ -1,5 +1,0 @@
-
-Error: Line Number at 1: Negative Number.
-Error: Line Number at 1: Invalid Order.
-Error: If statement at 2: Invalid variable used.
-Invalid command in line 6.

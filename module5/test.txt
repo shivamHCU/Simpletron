@@ -1,7 +1,0 @@
-1 rem calculate square of several integer
-2 input j
-3 if j == -1 goto 7
-4 let k = j * j
-5 print k
-6 goto 2 1
-7 end
