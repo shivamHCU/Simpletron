@@ -1,0 +1,17 @@
+01 input b
+02 input c
+03 input a
+04 goto 17
+05 input d
+06 let d=(a+b)*(10-c/2)
+07 if d<30 goto 01
+08 if d>30 goto 02
+09 if d<=40 goto 17
+10 if d>=40 goto 04
+11 if d!=0 goto 05
+12 if d==0 goto 06
+13 print d
+14 rem hello world
+15 let f=0-100
+16 if d<(a+1) goto 01
+17 end

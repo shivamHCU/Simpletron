@@ -1,0 +1,6 @@
+01 input m
+02 if m==(0-1) goto 05
+03 let s=1+m
+04 goto 01
+05 print s
+06 end
